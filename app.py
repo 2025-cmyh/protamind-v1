@@ -11,6 +11,9 @@ SYSTEM_PROMPT = (
 )
 
 def infer(img, extra_prompt):
+    if img is None:
+        # 如果没有图片输入，就礼貌地返回一个提示，而不是让程序崩溃。
+        return "请先上传一张图片再提交！"
     # 将图片转 base64
     buffered = io.BytesIO()
     img.save(buffered, format="JPEG")
