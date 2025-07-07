@@ -1,4 +1,6 @@
 together
 pillow
 gradio==5.17.1         
-pydantic==2.10.6 
+pydantic==2.10.6
+gunicorn
+unicorn 
