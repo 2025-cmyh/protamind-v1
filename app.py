@@ -1,9 +1,9 @@
 import os, base64, io
-import together
+from together import Together
 from PIL import Image
 import gradio as gr
 from fastapi import FastAPI
-client = together.Together(api_key=os.getenv("TOGETHER_API_KEY"))
+client = Together(api_key=os.getenv("TOGETHER_API_KEY"))
 
 SYSTEM_PROMPT = (
     "You are an expert botanist. Identify the plant in the image, "
