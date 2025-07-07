@@ -2,8 +2,8 @@ import os, base64, io
 from together import Together
 from PIL import Image
 import gradio as gr
-from fastapi import FastAPI
-client = Together(api_key=os.getenv("TOGETHER_API_KEY"))
+from openai import OpenAI
+client = OpenAI(api_key=os.getenv("TOGETHER_API_KEY"),base_url="https://api.together.xyz/v1",)
 
 SYSTEM_PROMPT = (
     "You are an expert botanist. Identify the plant in the image, "
