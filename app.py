@@ -1,9 +1,9 @@
 import os, base64, io
-from together import Together
+import together
 from PIL import Image
 import gradio as gr
-from openai import OpenAI
-client = OpenAI(api_key=os.getenv("TOGETHER_API_KEY"),base_url="https://api.together.xyz/v1",)
+
+client = together.Together(api_key=os.getenv("TOGETHER_API_KEY"))
 
 SYSTEM_PROMPT = (
     "You are an expert botanist. Identify the plant in the image, "
@@ -11,9 +11,9 @@ SYSTEM_PROMPT = (
 )
 
 def infer(img, extra_prompt):
-    if img is None:
-        # 如果没有图片输入，就礼貌地返回一个提示，而不是让程序崩溃。
-        return "请先上传一张图片再提交！"
+    if image is None:
+        return "❌ **错误：** 请先上传一张植物图片！"
+        
     # 将图片转 base64
     buffered = io.BytesIO()
     img.save(buffered, format="JPEG")
@@ -42,8 +42,8 @@ demo = gr.Interface(
     title="🌿 Welcome to Protamind",
     description="请上传植物照片"
 )
-app = FastAPI()
-app = gr.mount_gradio_app(app, demo, path="/")
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=int(os.environ.get('PORT', 7860)))
+ 
+    server_port = int(os.environ.get('PORT', 7860))
+    demo.launch(server_name="0.0.0.0", server_port=server_port)
