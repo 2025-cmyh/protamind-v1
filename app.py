@@ -2,7 +2,7 @@ import os, base64, io
 import together
 from PIL import Image
 import gradio as gr
-
+from fastapi import FastAPI
 client = together.Together(api_key=os.getenv("TOGETHER_API_KEY"))
 
 SYSTEM_PROMPT = (
@@ -42,6 +42,8 @@ demo = gr.Interface(
     title="🌿 Welcome to Protamind",
     description="请上传植物照片"
 )
+app = FastAPI()
+app = gr.mount_gradio_app(app, demo, path="/")
 
 if __name__ == "__main__":
     demo.launch(server_name="0.0.0.0", server_port=int(os.environ.get('PORT', 7860)))
